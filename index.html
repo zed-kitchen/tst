@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Tabouna 5x1 - Livraison Gratuit</title>
+
+<style>
+
+body{
+font-family:Arial;
+margin:0;
+background:#f7f7f7;
+color:#333;
+}
+
+header{
+background:#e67e22;
+color:white;
+text-align:center;
+padding:35px;
+}
+
+header h1{
+margin:0;
+font-size:34px;
+}
+
+.container{
+max-width:550px;
+margin:auto;
+padding:20px;
+}
+
+.product-img{
+width:100%;
+border-radius:12px;
+margin-bottom:20px;
+}
+
+.price{
+font-size:30px;
+color:#e74c3c;
+font-weight:bold;
+text-align:center;
+}
+
+.free{
+color:green;
+font-size:18px;
+text-align:center;
+margin-bottom:20px;
+}
+
+.features{
+background:white;
+padding:15px;
+border-radius:10px;
+margin-bottom:20px;
+box-shadow:0 3px 10px rgba(0,0,0,0.08);
+}
+
+.features p{
+margin:6px 0;
+}
+
+form{
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
+}
+
+input{
+width:100%;
+padding:12px;
+margin:10px 0;
+border:1px solid #ccc;
+border-radius:6px;
+font-size:16px;
+}
+
+button{
+width:100%;
+padding:15px;
+background:#27ae60;
+color:white;
+border:none;
+font-size:20px;
+border-radius:8px;
+cursor:pointer;
+}
+
+button:hover{
+background:#219150;
+}
+
+#msg{
+margin-top:15px;
+text-align:center;
+font-weight:bold;
+}
+
+footer{
+text-align:center;
+padding:20px;
+color:#777;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<h1> ZED-KITCHEN 🔥طابونة 5×1 🔥</h1>
+<p>عرض خاص بمناسبة شهر رمضان الكريم </p>
+</header>
+
+<div class="container">
+
+<!-- حط هنا الصورة تاعك -->
+<img class="product-img" src="IMG_2.jpg">
+
+<div class="price">15000 DA</div>
+<div class="free">🚚 التوصيل مجاني لباب المنزل</div>
+
+<div class="features">
+<p>✔ طبخ تقليدي</p>
+<p>✔ جودة عالية</p>
+<p>✔ الدفع عند الاستلام</p>
+<p>✔ توصيل سريع 24-48 ساعة</p>
+</div>
+
+<form id="orderForm">
+
+<input name="name" placeholder="الاسم و اللقب" required>
+
+<input name="phone" placeholder="رقم الهاتف" required>
+
+<input name="wilaya" placeholder="الولاية" required>
+
+<input name="commune" placeholder="البلدية" required>
+
+<button type="submit" id="btn">اطلب الآن</button>
+
+</form>
+
+<p id="msg"></p>
+
+</div>
+
+<footer>
+الدفع عند الاستلام | خدمة العملاء 24/24
+</footer>
+
+<script>
+
+const scriptURL="https://script.google.com/macros/s/AKfycbxhv7Oxu7kDtE9hat_mRbjj2cJc1iEbuMtXWUGGXiMng9O_odIZ5xxTiqSAywamS-1E/exec"
+
+const form=document.getElementById("orderForm")
+const msg=document.getElementById("msg")
+const button=document.getElementById("btn")
+
+form.addEventListener("submit",async e=>{
+
+e.preventDefault()
+
+button.disabled=true
+button.innerText="جاري الإرسال..."
+
+try{
+
+const response=await fetch(scriptURL,{
+method:"POST",
+body:new FormData(form)
+})
+
+if(response.ok){
+msg.innerHTML="✅ تم تسجيل طلبك بنجاح! سنتصل بك قريباً."
+form.reset()
+}else{
+msg.innerHTML="❌ حدث خطأ في الإرسال."
+}
+
+}catch(error){
+msg.innerHTML="❌ حدث خطأ تأكد من رابط Google Script."
+}
+
+button.disabled=false
+button.innerText="اطلب الآن"
+
+})
+
+</script>
+
+</body>
+</html>
